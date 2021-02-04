@@ -73,8 +73,18 @@ elif not LOCAL_MODE and not HOST_URL.startswith("https"):
 SEP10_HOME_DOMAINS = env_or_settings("SEP10_HOME_DOMAINS", list=True) or [
     urlparse(HOST_URL).netloc
 ]
-if any(d.startswith("http") for d in SEP10_HOME_DOMAINS):
+if any(urlparse(f"https://{d}").netloc != d for d in SEP10_HOME_DOMAINS):
     raise ImproperlyConfigured("SEP10_HOME_DOMAINS must only be hostnames")
+
+SEP10_CLIENT_ATTRIBUTION_REQUIRED = env_or_settings(
+    "SEP10_CLIENT_ATTRIBUTION_REQUIRED", bool=True
+)
+SEP10_CLIENT_ATTRIBUTION_ALLOWLIST = env_or_settings(
+    "SEP10_CLIENT_ATTRIBUTION_ALLOWLIST", list=True
+)
+SEP10_CLIENT_ATTRIBUTION_DENYLIST = env_or_settings(
+    "SEP10_CLIENT_ATTRIBUTION_DENYLIST", list=True
+)
 
 MAX_TRANSACTION_FEE_STROOPS = env_or_settings("MAX_TRANSACTION_FEE_STROOPS", int=True)
 

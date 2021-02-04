@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "13ebfa9345144eb4b683ff8aa696c8c4ea004d116e5225c1b5b40c838380e175"
+            "sha256": "6c598ea48333b5a3abfa680b5d7b5226f549d6db24d7e204b0f394ce38506041"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -387,12 +387,13 @@
             "version": "==0.0.21"
         },
         "stellar-sdk": {
+            "editable": true,
+            "git": "https://github.com/JakeUrban/py-stellar-base.git",
             "hashes": [
                 "sha256:05e800ff7c67861955be3c469843fe936c33830fac43e73ec447079a5eac3e14",
                 "sha256:e4a43a533b13565c51d8745c98c6269b5b66b38e362048610940c03ec867e7a8"
             ],
-            "index": "pypi",
-            "version": "==2.11.1"
+            "ref": "149394c9e86cc824aa7945f6fe8ec04927096481"
         },
         "toml": {
             "hashes": [

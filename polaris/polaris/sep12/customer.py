@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Optional
 from polaris.utils import getLogger
 
 from django.utils.translation import gettext as _
@@ -24,7 +24,7 @@ class CustomerAPIView(APIView):
 
     @staticmethod
     @validate_sep10_token()
-    def get(account: str, request: Request) -> Response:
+    def get(account: str, _client_domain: Optional[str], request: Request) -> Response:
         if request.GET.get("account") and account != request.GET.get("account"):
             return render_error_response(
                 _("The account specified does not match authorization token"),
@@ -78,7 +78,7 @@ class CustomerAPIView(APIView):
 
     @staticmethod
     @validate_sep10_token()
-    def put(account: str, request: Request) -> Response:
+    def put(account: str, _client_domain: Optional[str], request: Request) -> Response:
         if request.data.get("id"):
             if not isinstance(request.data.get("id"), str):
                 return render_error_response(_("bad ID value, expected str"))
@@ -132,7 +132,7 @@ class CustomerAPIView(APIView):
 @renderer_classes([JSONRenderer, BrowsableAPIRenderer])
 @parser_classes([MultiPartParser, FormParser, JSONParser])
 @validate_sep10_token()
-def delete(account_from_auth: str, request: Request, account: str,) -> Response:
+def delete(account_from_auth: str, _client_domain: Optional[str], request: Request, account: str,) -> Response:
     if account_from_auth != account:
         return render_error_response(_("account not found"), status_code=404)
     try:

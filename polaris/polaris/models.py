@@ -578,14 +578,27 @@ class Transaction(models.Model):
     This is only used for transactions requiring signatures Polaris cannot
     add itself.
     """
+
     claimable_balance_supported = models.BooleanField(default=False)
     """
     claimable_balance_supported is a boolean to indicate if the wallet supports the SEP24
     requirements for handeling claimable balance deposits.
     """
+
     claimable_balance_id = models.TextField(null=True, blank=True)
     """
-    The ID of the claimable balance used to send funds to the user. This column will be ``None`` if ``claimable_balance_supported`` is ``False`` or if the transaction has not yet been submitted to the Stellar network.
+    The ID of the claimable balance used to send funds to the user. This column will be 
+    ``None`` if ``claimable_balance_supported`` is ``False`` or if the transaction has 
+    not yet been submitted to the Stellar network.
+    """
+
+    client_domain = models.TextField(null=True, blank=True)
+    """
+    The hostname of the client application that requested this transaction on behalf of
+    the user. The SIGNING_KEY on `https://client_domain/.well-known/stellar.toml` signed 
+    the challenge transaction used to obtain the authentication token necessary to 
+    request this transaction, effectively allowing requests including the authentication 
+    token to be attributed to it.
     """
 
     objects = models.Manager()

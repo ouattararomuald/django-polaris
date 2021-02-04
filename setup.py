@@ -5,6 +5,9 @@ with open("README.rst") as f:
     long_description = f.read()
 
 setup(
+    dependency_links=[
+        "git+https://github.com/JakeUrban/py-stellar-base.git@149394c9e86cc824aa7945f6fe8ec04927096481#egg=stellar-sdk"
+    ],
     name="django-polaris",
     version="1.2.0",
     description="An extendable Django server for Stellar Ecosystem Proposals",
@@ -48,8 +51,8 @@ setup(
         "chardet==3.0.4",
         "crc16==0.1.1",
         "cryptography==3.3.1",
-        "django==2.2.17",
-        "django-cors-headers==3.6.0",
+        "django==2.2.18",
+        "django-cors-headers==3.7.0",
         "django-environ==0.4.5",
         "django-model-utils==4.1.1",
         "djangorestframework==3.12.2",
@@ -60,15 +63,14 @@ setup(
         "pycparser==2.20; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
         "pyjwt==1.7.1",
         "pynacl==1.4.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
-        "pytz==2020.5",
+        "pytz==2021.1",
         "requests==2.25.1; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
         "six==1.15.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
         "sqlparse==0.4.1; python_version >= '3.5'",
         "stellar-base-sseclient==0.0.21",
-        "stellar-sdk==2.11.1",
         "toml==0.10.2",
         "typing-extensions==3.7.4.3; python_version < '3.8'",
-        "urllib3==1.26.2; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
+        "urllib3==1.26.3; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
         "whitenoise==5.2.0",
         "yarl==1.6.3; python_version >= '3.6'",
     ],

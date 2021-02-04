@@ -3,6 +3,7 @@ This module implements the logic for the `/transactions/withdraw` endpoint.
 This lets a user withdraw some asset from their Stellar account into a
 non-Stellar-based account.
 """
+from typing import Optional
 from decimal import Decimal, DecimalException
 from urllib.parse import urlencode
 
@@ -324,7 +325,11 @@ def get_interactive_withdraw(request: Request) -> Response:
 @validate_sep10_token()
 @renderer_classes([JSONRenderer, BrowsableAPIRenderer])
 @parser_classes([MultiPartParser, FormParser, JSONParser])
-def withdraw(account: str, request: Request) -> Response:
+def withdraw(
+    account: str,
+    client_domain: Optional[str],
+    request: Request,
+) -> Response:
     """
     POST /transactions/withdraw/interactive
 
@@ -374,6 +379,7 @@ def withdraw(account: str, request: Request) -> Response:
         receiving_anchor_account=asset.distribution_account,
         memo_type=Transaction.MEMO_TYPES.hash,
         protocol=Transaction.PROTOCOL.sep24,
+        client_domain=client_domain,
     )
     logger.info(f"Created withdrawal transaction {transaction_id}")
 

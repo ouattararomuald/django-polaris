@@ -8,6 +8,7 @@ watchdog = "<0.10"
 
 [packages]
 gunicorn = "*"
+stellar-sdk = {editable = true, ref = "sep10-client-attribution", git = "https://github.com/JakeUrban/py-stellar-base.git"}
 django-polaris = {path = "/code", editable = true}
 
 [requires]

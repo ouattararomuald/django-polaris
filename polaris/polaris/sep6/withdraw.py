@@ -1,4 +1,4 @@
-from typing import Dict, Tuple
+from typing import Dict, Tuple, Optional
 
 from django.utils.translation import gettext as _
 from rest_framework.request import Request
@@ -33,7 +33,11 @@ logger = getLogger(__name__)
 @parser_classes([MultiPartParser, FormParser, JSONParser])
 @renderer_classes([JSONRenderer, BrowsableAPIRenderer])
 @validate_sep10_token()
-def withdraw(account: str, request: Request) -> Response:
+def withdraw(
+    account: str,
+    client_domain: Optional[str],
+    request: Request,
+) -> Response:
     args = parse_request_args(request)
     if "error" in args:
         return args["error"]
@@ -53,6 +57,7 @@ def withdraw(account: str, request: Request) -> Response:
         memo=transaction_memo,
         memo_type=Transaction.MEMO_TYPES.hash,
         protocol=Transaction.PROTOCOL.sep6,
+        client_domain=client_domain,
     )
 
     # All request arguments are validated in parse_request_args()
